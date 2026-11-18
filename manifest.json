@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "algoritmo": "AES-256-GCM",
+  "compresion": "gzip",
+  "kdf": {
+    "nombre": "PBKDF2-HMAC-SHA256",
+    "iteraciones": 600000
+  },
+  "sal": "xZcU9+EeuRl+HSSF6O0O1g==",
+  "iv": "cgUFxlbQJLcXk8je",
+  "tam_original": 26244306,
+  "tam_comprimido": 19409593,
+  "tam_cifrado": 19409609,
+  "partes": [
+    {
+      "archivo": "datos/parte_001.bin",
+      "bytes": 8388608,
+      "sha256": "5d8f08348758323c281b5a3d4ee9bd66cf90117d07da739525e64c2a18f2eb2a"
+    },
+    {
+      "archivo": "datos/parte_002.bin",
+      "bytes": 8388608,
+      "sha256": "7a2a66a329bb82b09df15b2b72f2913666da20a5af5b6d02e70dba6597555637"
+    },
+    {
+      "archivo": "datos/parte_003.bin",
+      "bytes": 2632393,
+      "sha256": "92f7f998e19fa4511bf8d0933bcac936714451e4e8306028dae73338616a317c"
+    }
+  ],
+  "fecha": "2026-11-18T03:40:25+00:00"
+}
