@@ -1,0 +1,17 @@
+# Raíz del repositorio Dashboard-Inmaculada. Los sobres cifrados de proyectos (02 Input/protegido/) SÍ se versionan.
+# Plantilla en claro, resultados, configuración local y claves nunca se publican.
+03 Output/
+plantilla/
+02 Input/dashboard_base/
+02 Input/configuracion_nube.json
+datos_prueba/
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.pem
+*.key
+*.wpcx
+*.exe

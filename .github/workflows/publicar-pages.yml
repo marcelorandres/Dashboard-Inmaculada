@@ -1,0 +1,46 @@
+name: Publicar dashboard WPC
+# Este repositorio (Dashboard-Inmaculada) tiene el sitio en la RAIZ: index.html + protegido/.
+# Solo se publica esa carpeta pública (_site); 02 Input/protegido (sobres cifrados de proyectos) se lee por raw.githubusercontent.com.
+# Los snapshots nuevos NO disparan este flujo: solo cambios en el código del visor o en la plantilla cifrada.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'protegido/**'
+      - '.nojekyll'
+      - '.github/workflows/publicar-pages.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verificar preparación local
+        run: |
+          test -s index.html
+          test -s protegido/dashboard-template.enc.json
+          test -s protegido/config-public.json
+          if grep -q 'CAMBIAR_' protegido/config-public.json; then exit 1; fi
+          if grep -q 'local_base' protegido/config-public.json; then echo 'config-public.json trae el modo de prueba local_base'; exit 1; fi
+      - name: Preparar carpeta pública
+        run: |
+          mkdir _site
+          cp index.html .nojekyll _site/
+          cp -r protegido _site/protegido
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: '_site'
+      - id: deployment
+        uses: actions/deploy-pages@v4
